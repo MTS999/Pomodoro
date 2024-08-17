@@ -1,0 +1,69 @@
+import React, { useContext, useEffect } from "react";
+import { useState } from "react";
+import { Icon, Typography, MenuItem, Select, Box } from "@mui/material";
+import PomodoroContext from "../../PomodoroContext";
+
+const Alarams = () => {
+  const { select,selectedTrack, setSelectedTrack } = useContext(PomodoroContext);
+  const [selectedTrack, setSelectedTrack] = useState("/sounds/kitchen.mp3");
+  const [initial, setInitial] = useState(true);
+  console.log(select);
+  
+  const audioRef = React.useRef(null);
+
+  useEffect(() => {
+    console.log("mts");
+    
+    playAudio();
+  }, [select]);
+
+  const playAudio = () => {
+    if (initial) {
+      setInitial(false)
+      return;
+    }
+    if (audioRef.current) {
+      audioRef.current.play();
+    }
+  };
+  const handleTrackChange = (e) => {
+    setSelectedTrack(e.target.value);
+    if (audioRef.current) {
+      audioRef.current.load();
+    }
+  };
+  return (
+    <Box display="flex" alignItems="center" gap={2}>
+      <Icon sx={{ color: "#ccc", fontSize: 20 }}>volume_up</Icon>
+      <Box>
+        <Typography variant="caption" color="textSecondary">
+          SOUND
+        </Typography>
+        <Typography variant="body1" fontWeight="bold" gutterBottom>
+          Alarm Sound
+        </Typography>
+        <Select
+          value={selectedTrack}
+          onChange={handleTrackChange}
+          variant="outlined"
+          sx={{
+            minWidth: 120,
+            backgroundColor: "#f4f4f4",
+            borderRadius: "4px",
+            "& .MuiSelect-select": {
+              padding: "8px 14px",
+            },
+          }}
+        >
+          <MenuItem value="/sounds/kitchen.mp3">Kitchen</MenuItem>
+          <MenuItem value="/sounds/forest.mp3">Forest</MenuItem>
+          <MenuItem value="/sounds/beach.mp3">Beach</MenuItem>
+          <MenuItem value="/sounds/city.mp3">City</MenuItem>
+        </Select>
+      </Box>
+      <audio ref={audioRef} src={selectedTrack} />
+    </Box>
+  );
+};
+
+export default Alarams;

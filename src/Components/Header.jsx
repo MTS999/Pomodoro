@@ -12,8 +12,9 @@ const Header = () => {
         <Typography
           display={"inline-block"}
           mr={10}
-          variant="body1"
-          color="primary.main"
+          variant="h5"
+          fontWeight={"bold"}
+          color={theme.palette.background.white}
         >
           Pomodoro
         </Typography>
@@ -23,7 +24,7 @@ const Header = () => {
           sx={{
             marginRight: "10px",
             backgroundColor: theme.palette.background.primary,
-            color: theme.palette.primary.main,
+            color: theme.palette.background.white,
           }}
         >
           Report
@@ -34,7 +35,7 @@ const Header = () => {
           sx={{
             marginRight: "10px",
             backgroundColor: theme.palette.background.primary,
-            color: theme.palette.primary.main,
+            color: theme.palette.background.white,
             border: "none",
           }}
           onClick={() => setOpenSetting(!openSetting)}
@@ -47,7 +48,7 @@ const Header = () => {
           sx={{
             marginRight: "10px",
             backgroundColor: theme.palette.background.primary,
-            color: theme.palette.primary.main,
+            color: theme.palette.background.white,
           }}
         >
           SignIn

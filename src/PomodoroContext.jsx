@@ -1,6 +1,7 @@
 import React from "react";
 import { createContext, useState } from "react";
-
+import { pomodoroTheme, shortBreakTheme, longBreakTheme } from "./theme";
+import { useMemo } from "react";
 const PomodoroContext = createContext();
 
 export const PomodoroProvider = ({ children }) => {
@@ -56,6 +57,16 @@ console.log(volume);
 
   }
 ])
+const theme = useMemo(() => {
+  switch (select) {
+    case 2:
+      return shortBreakTheme;
+    case 3:
+      return longBreakTheme;
+    default:
+      return pomodoroTheme;
+  }
+}, [select]);
   // console.log(select);
   return (
     <PomodoroContext.Provider
@@ -83,7 +94,7 @@ console.log(volume);
         autoSwitchTasks, setAutoSwitchTasks,
         selectedTrack, setSelectedTrack,
         alarmRepeatCount, setAlarmRepeatCount,
-        volume, setVolume
+        volume, setVolume,theme
       }}
     >
       {children}

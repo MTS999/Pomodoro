@@ -152,10 +152,12 @@ const Counter = () => {
     setSelect(selection);
   };
   const getButtonStyles = (buttonSelect) => ({
+    
     backgroundColor:
       select === buttonSelect ? theme.palette.background.secondary : "",
-    color: theme.palette.primary.main,
+    color: theme.palette.background.white,
     fontWeight: select === buttonSelect ? "bold" : "",
+    padding:""
   });
   return (
     <>
@@ -174,15 +176,23 @@ const Counter = () => {
             variant="text"
             onClick={() => handleClick(pomodoroTime, 1)}
             style={getButtonStyles(1)}
+          sx={{
+            paddingLeft:"14px",
+            paddingRight:"14px"
+          }}
           >
             Pomodoro
           </Button>
           <Button
-            size="medium"
+            size="small"
             variant="text"
             color="primary"
             onClick={() => handleClick(shortBreakTime, 2)}
             style={getButtonStyles(2)}
+            sx={{
+              paddingLeft:"14px",
+              paddingRight:"14px"
+            }}
           >
             Short Break
           </Button>
@@ -192,6 +202,10 @@ const Counter = () => {
             color="primary"
             onClick={() => handleClick(longBreakTime, 3)}
             style={getButtonStyles(3)}
+            sx={{
+              paddingLeft:"14px",
+              paddingRight:"14px"
+            }}
           >
             Long Break
           </Button>
@@ -203,9 +217,16 @@ const Counter = () => {
 
         <Button
           variant="contained"
+          size="large"
           onClick={() => (isActive ? setIsActive(false) : setIsActive(true))}
           sx={{
             color: theme.palette.background.default,
+            backgroundColor: theme.palette.background.white,
+            fontSize:"20px",
+            fontWeight:"bold",
+            ":hover":{
+              backgroundColor:theme.palette.background.white
+            }
           }}
         >
           {isActive ? "Stop" : "Start"}

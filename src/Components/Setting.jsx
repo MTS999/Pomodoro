@@ -43,15 +43,25 @@ export default function Setting() {
 
   return (
     <React.Fragment>
-      {/* <Button onClick={handleClickOpen("paper")}>scroll=paper</Button> */}
       <Dialog
+      // width={"600px"}
         open={openSetting}
         onClose={handleClose}
         scroll={scroll}
         aria-labelledby="scroll-dialog-title"
         aria-describedby="scroll-dialog-description"
+        sx={{
+          '& .MuiDialog-paper': {
+            margin: '9px', // Set the margin around the dialog
+            maxWidth: '430px', // You can also control the max width
+            width: '100%', // Ensure it scales down for smaller screens
+          },
+        }}
+     
       >
         <DialogTitle
+        // width={"400px"}
+          // margin={"12px"}
           id="scroll-dialog-title"
           fontWeight={"bold"}
           sx={{
@@ -64,7 +74,13 @@ export default function Setting() {
         >
           SETTING
         </DialogTitle>
-        <DialogContent dividers={scroll === "paper"} sx={{ maxHeight: "60vh" }}>
+        <DialogContent
+          
+         dividers={scroll === "paper"} sx={{
+           maxHeight: "70vh",
+          //  maxWidth:"700px",
+          //  width:"500px"
+            }}>
           <DialogContentText
             id="scroll-dialog-description"
             ref={descriptionElementRef}

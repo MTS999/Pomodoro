@@ -28,7 +28,7 @@ const Alarams = () => {
   return (
     <>
       <Box
-        width={"400px"}
+        width={"100%"}
         display={"flex"}
         // alignItems={"center"}
         flexDirection={"column"}
@@ -69,7 +69,7 @@ const Alarams = () => {
             onChange={handleTrackChange}
             variant="outlined"
             sx={{
-              minWidth: 120,
+              minWidth: 100,
               backgroundColor: "#f4f4f4",
               borderRadius: "4px",
               "& .MuiSelect-select": {
@@ -87,7 +87,7 @@ const Alarams = () => {
           display={"flex"}
           justifyContent={"space-between"}
           alignItems={"center"}
-          mb={2}
+          // mb={2}
           // sx={{ backgroundColor: "red" }}
         >
           <Typography
@@ -96,32 +96,31 @@ const Alarams = () => {
             fontWeight={"bold"}
             color={theme.palette.setting.text}
             // sx={{ backgroundColor: "black" }}
-
           >
             Volume
           </Typography>
-          <Box>
-          <Typography
-            display={"inline-block"}
-            variant="h6"
-            fontWeight={"bold"}
-            color={theme.palette.setting.text}
-            // backgroundColor={"green"}
-            height={"100%"}
-            // marginLeft={"20px"}
+          <Box display={"flex"}
+          justifyContent={"space-between"}
+          gap={1}>
+            <Typography
+              display={"inline-block"}
+              variant="h6"
+              fontWeight={"bold"}
+              color={theme.palette.setting.main}
+              // backgroundColor={"green"}
+              height={"100%"}
+              mt={1}
+              // marginLeft={"20px"}
 
-            marginRight={"20px"}
-            
-          >
-            {volume}
+              // marginRight={"20px"}
+            >
+              {volume}
             </Typography>
-
             <Slider
-          
               value={volume}
               onChange={(e, newValue) => setVolume(newValue)}
               aria-labelledby="volume-slider"
-              sx={{ width: "150px", color: theme.palette.setting.main }}
+              sx={{ width: "90px", color: theme.palette.setting.main }}
             />
           </Box>
         </Box>
@@ -147,7 +146,7 @@ const Alarams = () => {
             value={alarmRepeatCount}
             onChange={(e) => setAlarmRepeatCount(Number(e.target.value))}
             inputProps={{ min: 1 }}
-            sx={{ width: "100px", color: theme.palette.setting.main }}
+            sx={{ width: "60px", color: theme.palette.setting.main }}
           />
         </Box>
       </Box>

@@ -17,7 +17,7 @@ const TaskSetting = () => {
   return (
     <>
       <Box
-        width={"400px"}
+        width={"100%"}
         display={"flex"}
         // alignItems={"center"}
         flexDirection={"column"}

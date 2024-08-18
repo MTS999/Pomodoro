@@ -39,53 +39,15 @@ const ThemeSetting = () => {
             textAlign={"start"}
           >
             <i
-              className="nf nf-md-checkbox_marked_circle_outline"
+              className="nf nf-md-theme_light_dark"
               style={{ marginRight: "8px" }}
             ></i>
-            Task
+            Theme
           </Typography>
         </Box>
 
-        <Box
-          width={"100%"}
-          display={"flex"}
-          justifyContent={"space-between"}
-          mb={2}
-          // sx={{ backgroundColor: "green" }}
-        >
-          <Typography
-            display={"inline-block"}
-            variant="h6"
-            fontWeight={"bold"}
-            color={theme.palette.setting.text}
-          >
-            Auto Check Tasks
-          </Typography>
-          <IOSSwitch
-            checked={autoCheckTasks}
-            onChange={() => setAutoCheckTasks((prev) => !prev)}
-          />
-        </Box>
-        <Box
-          width={"100%"}
-          display={"flex"}
-          justifyContent={"space-between"}
-          mb={2}
-          // sx={{ backgroundColor: "green" }}
-        >
-          <Typography
-            display={"inline-block"}
-            variant="h6"
-            fontWeight={"bold"}
-            color={theme.palette.setting.text}
-          >
-            Auto switch Tasks
-          </Typography>
-          <IOSSwitch
-            checked={autoSwitchTasks}
-            onChange={() => setAutoSwitchTasks((prev) => !prev)}
-          />
-        </Box>
+      
+       
         <Box
           width={"100%"}
           display={"flex"}

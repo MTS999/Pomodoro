@@ -101,7 +101,7 @@ const Alarams = () => {
           </Typography>
           <Box display={"flex"}
           justifyContent={"space-between"}
-          gap={1}>
+          gap={2}>
             <Typography
               display={"inline-block"}
               variant="h6"

@@ -14,6 +14,7 @@ import { useTheme } from "@mui/material/styles";
 import TaskSetting from "./AllSettings/TaskSetting";
 import Alarams from "./AllSettings/Alarams";
 import AudioPlayer from "./AllSettings/AudioPlayer";
+import ThemeSetting from "./AllSettings/ThemeSetting";
 
 export default function Setting() {
   const theme = useTheme();
@@ -105,6 +106,15 @@ export default function Setting() {
               }}
             />
             <Alarams />
+            <Divider
+              sx={{
+                width: "100%",
+                borderBottomWidth: 2, // Adjust the thickness
+                borderColor: { color: theme.palette.setting.main }, // Change the color
+                marginY: 2, // Adjust the width to fit the parent container
+              }}
+            />
+            <ThemeSetting/>
         {/* <AudioPlayer/> */}
           </DialogContentText>
         </DialogContent>

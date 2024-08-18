@@ -60,5 +60,24 @@ const longBreakTheme = createTheme({
     },
   },
 });
+const darkMode = createTheme({
+  palette: {
+    setting: {
+      main: '#CCCCCC',
+      secondary: '#EFEFEF',
+      text: '#555555',
+      menu: "#999999",
+    },
+    background: {
+      default: '#000000',
+      primary: "#000000",
+      secondary: "#000000",
+      white:"000000",
+      line:"#000000"
 
-export { pomodoroTheme, shortBreakTheme, longBreakTheme };
+
+    },
+  },
+});
+
+export { pomodoroTheme, shortBreakTheme, longBreakTheme,darkMode };

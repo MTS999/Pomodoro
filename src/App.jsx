@@ -27,7 +27,7 @@ function PomodoroApp() {
     <ThemeProvider theme={theme}>
       <Container
       
-        maxWidth="xl"
+        maxWidth="1700px"
         sx={{ backgroundColor: "background.default",
           //  height: "200vh" 
           }}

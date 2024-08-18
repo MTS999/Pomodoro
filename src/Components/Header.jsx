@@ -31,7 +31,7 @@ const Header = () => {
         >
           <i
             className="nf nf-md-checkbox_marked_circle"
-            style={{ marginRight: !isSmallScreen ? "0px" : "4px" }}
+            style={{ marginRight: isSmallScreen ? "0px" : "4px" }}
           ></i>
         
           {!isExtraSmallScreen && "Pomodoro"}
@@ -44,7 +44,9 @@ const Header = () => {
             sx={{
               marginRight: "10px",
               backgroundColor: theme.palette.background.primary,
-              color: theme.palette.background.white,
+              // color: theme.palette.background.white,
+              color: "white",
+
               minWidth: isSmallScreen ? "auto" : "100px", // Adjust width based on screen size
               minHeight: isSmallScreen ? "auto" : "35px",
               // minWidth:"auto",
@@ -65,7 +67,9 @@ const Header = () => {
             sx={{
               marginRight: "10px",
               backgroundColor: theme.palette.background.primary,
-              color: theme.palette.background.white,
+              // color: theme.palette.background.white,
+              color: "white",
+
               border: "none",
               minWidth: isSmallScreen ? 'auto' : '100px', // Adjust width based on screen size
               minHeight: isSmallScreen ? 'auto' : '35px',
@@ -91,7 +95,8 @@ const Header = () => {
             sx={{
               marginRight: "10px",
               backgroundColor: theme.palette.background.primary,
-              color: theme.palette.background.white,
+              // color: theme.palette.background.white,
+              color: "white",
      
               minWidth:  'auto' , // Adjust width based on screen size
               minHeight: 'auto' ,

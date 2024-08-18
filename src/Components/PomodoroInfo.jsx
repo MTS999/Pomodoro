@@ -26,8 +26,8 @@ const PomodoroInfo = () => {
     }, 0)
   );
 
-  console.log(newTime);
-  console.log(timeDifference);
+  // console.log(newTime);
+  // console.log(timeDifference);
 
   useEffect(() => {
     const currentTime = new Date();

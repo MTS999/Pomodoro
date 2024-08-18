@@ -25,16 +25,22 @@ const Counter = () => {
     setAutoCheckTasks,
     autoSwitchTasks,
     setAutoSwitchTasks,
+    totalPomodoroCount, setTotalPomodoroCount,
+    
+    isActive, setIsActive,
+    isDarkTheme
   } = useContext(PomodoroContext);
 
   // console.log(pomodoroTime);
   const [time, setTime] = useState(pomodoroTime);
 
-  const [isActive, setIsActive] = useState(false);
+  // const [isActive, setIsActive] = useState(false);
   // const [select, setSelect] = useState(1);
   const [pomodoroCounterForLongBreak, setPomodoroCounterForLongBreak] =
     useState(longBreakIntervals);
   const [firstLoad, setFirstLoad] = useState(true);
+  const [manualSwitch, setManualSwitch] = useState(false); // New state to track manual switch
+
 
   const totalTime =
     select === 1 ? pomodoroTime : select === 2 ? shortBreakTime : longBreakTime;
@@ -42,12 +48,15 @@ const Counter = () => {
   useEffect(() => {
     let interval;
     if (isActive && time > 0) {
+      console.log(isActive);
+      
       interval = setInterval(() => {
         setTime((time) => time - 1);
       }, 1000);
     } else if (!isActive && time !== 0) {
       clearInterval(interval);
     } else if (isActive && time == 0 && select == 1) {
+      setTotalPomodoroCount(totalPomodoroCount+1)
       increamentPomodoro();
 
       let updateCounter = pomodoroCounterForLongBreak - 1;
@@ -78,20 +87,30 @@ const Counter = () => {
     if (firstLoad) {
       setFirstLoad(false);
     } else {
-      if (select === 1) {
-        setTime(pomodoroTime);
-        setIsActive(autoStartPomodoros ? true : false);
-      }
-      if (select === 2) {
-        setTime(shortBreakTime);
-        setIsActive(autoStartBreaks ? true : false);
-      }
-      if (select === 3) {
-        setTime(longBreakTime);
-        setIsActive(autoStartBreaks ? true : false);
-      }
+
+      const startTimer = () => {
+        if (select === 1) {
+          setTime(pomodoroTime);
+          setIsActive(manualSwitch ? false : autoStartPomodoros);
+        }
+        if (select === 2) {
+          setTime(shortBreakTime);
+          setIsActive(manualSwitch ? false : autoStartBreaks);
+        }
+        if (select === 3) {
+          setTime(longBreakTime);
+          setIsActive(manualSwitch ? false : autoStartBreaks);
+        }
+        setManualSwitch(false);
+      };
+  
+      const timer = setTimeout(startTimer, 2000); // 1-second delay
+  
+      return () => clearTimeout(timer); // Cleanup in case the component unmounts or dependencies change
     }
-  }, [
+  
+}
+  , [
     pomodoroTime,
     shortBreakTime,
     longBreakTime,
@@ -153,16 +172,19 @@ const Counter = () => {
   };
 
   const handleClick = (time, selection) => {
+    console.log("mts");
+    
     setTime(time);
-    setIsActive(false);
     setSelect(selection);
+    setIsActive(false);
+    setManualSwitch(true)
   };
   const getButtonStyles = (buttonSelect) => ({
     backgroundColor:
       select === buttonSelect ? theme.palette.background.secondary : "",
     color: theme.palette.background.white,
     fontWeight: select === buttonSelect ? "bold" : "",
-    padding: "",
+    transition: "background-color 0.3s ease, color 0.3s ease", // Smooth transition
   });
   return (
     <>
@@ -198,11 +220,15 @@ const Counter = () => {
         backgroundColor="brown"
         borderRadius={2}
       >
+        {  
+
+        
         <Box
           width={"100%"}
-          display={"flex"}
+          display={ "flex"}
           justifyContent={"center"}
           gap={isExtraSmallScreen ? "20px" : "opx"}
+          visibility={!(isDarkTheme && isActive) ? "visible" : "hidden" }
         >
           <Button
             size="large"
@@ -234,7 +260,7 @@ const Counter = () => {
           <Button
             size="small"
             variant="text"
-            color="primary"
+            // color="primary"
             onClick={() => handleClick(longBreakTime, 3)}
             style={getButtonStyles(3)}
             sx={{
@@ -244,7 +270,7 @@ const Counter = () => {
           >
             {!isExtraSmallScreen ? " Long Break" : "Long"}
           </Button>
-        </Box>
+        </Box>}
         <Box mt={4} mb={2}>
           {" "}
           {timeFormet()}
@@ -255,13 +281,15 @@ const Counter = () => {
           size="large"
           onClick={() => (isActive ? setIsActive(false) : setIsActive(true))}
           sx={{
-            color: theme.palette.background.default,
-            backgroundColor: theme.palette.background.white,
+            // color: theme.palette.background.default,
+            color:   (isDarkTheme && isActive)?"white": theme.palette.background.default,
+            // backgroundColor: theme.palette.background.white,
+         backgroundColor:   !(isDarkTheme && isActive)?"white": "#000000",
             fontSize: "20px",
             padding: "10px 40px",
             fontWeight: "bold",
             ":hover": {
-              backgroundColor: theme.palette.background.white,
+              backgroundColor: !(isDarkTheme && isActive)?"white": "#000000",
             },
           }}
         >

@@ -11,10 +11,13 @@ const Task = () => {
     setTasks,
     currentTaskId,
     setCurrentTaskId,
-    autoCheckTasks,
-    setAutoCheckTasks,
-    autoSwitchTasks,
-    setAutoSwitchTasks,
+    select,totalPomodoroCount, setTotalPomodoroCount,
+    // autoCheckTasks,
+    // setAutoCheckTasks,
+    // autoSwitchTasks,
+    // setAutoSwitchTasks,
+    isDarkTheme,
+    isActive,
   } = useContext(PomodoroContext);
   const [currentTask, setCurrentTask] = useState(null);
   // console.log(currentTask);
@@ -124,7 +127,7 @@ const Task = () => {
             color={theme.palette.setting.main}
             // pt={4}
             // backgroundColor={"green"}
-            ml={.2}
+            ml={0.2}
           >
             /{task.totalPomodoros}
             &nbsp;&nbsp;
@@ -155,22 +158,32 @@ const Task = () => {
   ));
   return (
     <>
-      <Box 
+      <Box
         width={{ sm: "80%", xs: "100%" }}
         mt={3}
         mb={2}
-      // backgroundColor="green"
+        // backgroundColor="green"
       >
         <Box>
-          <Typography textAlign={"center"} variant="h6" color="white">
+          <Typography 
+                   visibility={!(isDarkTheme && isActive) ? "visible" : "hidden"}
+
+          textAlign={"center"} variant="body1" color={theme.palette.setting.main}>
+           #{totalPomodoroCount}
+          </Typography>
+          <Typography textAlign={"center"} variant="body1" color="white">
             {
               // select==1? "Time for a Break":"mts"
-              currentTask?.title
+
+              currentTaskId?  currentTask?.title: (select==1?"Time to focus!":"Time for a Break!")
+              // currentTask?.title
             }
           </Typography>
         </Box>
-        <Box>
+        <Box
+         visibility={!(isDarkTheme && isActive) ? "visible" : "hidden"}>
           <Box
+            visibility={!(isDarkTheme && isActive) ? "visible" : "hidden"}
             display={"flex"}
             justifyContent={"space-between"}
             alignItems={"center"}
@@ -184,12 +197,14 @@ const Task = () => {
             >
               Tasks
             </Typography>
-          
+
             <TaskMenu />
           </Box>
 
           <Divider
             sx={{
+              visibility: !(isDarkTheme && isActive) ? "visible" : "hidden",
+
               width: "100%",
               borderBottomWidth: 2, // Adjust the thickness
               borderColor: "white", // Change the color
@@ -199,140 +214,141 @@ const Task = () => {
           {taskList}
         </Box>
         <Box
-        width={"100%"}
-        // backgroundColor={"green"}
+          width={"100%"}
+          // backgroundColor={"green"}
         >
+          {!openTask && (
+            <Box
+              visibility={!(isDarkTheme && isActive) ? "visible" : "hidden"}
+              onClick={() => setOpenTask(!openTask)}
+              mt={3}
+              sx={{
+                backgroundColor: "rgba(255, 255, 255, 0.2)", // Semi-transparent white background
+                borderRadius: "5px",
+                backdropFilter: "blur(5px)",
 
-        {!openTask && (
-          <Box
-            onClick={() => setOpenTask(!openTask)}
-            mt={3}
-            sx={{
-              backgroundColor: "rgba(255, 255, 255, 0.2)", // Semi-transparent white background
-              borderRadius: "5px",
-              backdropFilter: "blur(5px)",
-
-              transition: "all 0.3s ease",
-              "&:hover": {
-                backgroundColor: "rgba(255, 255, 255, 0.3)",
-                backdropFilter: "blur(5px) brightness(1.2)",
-              },
-            }}
-            height={"60px"}
-            width={"100%"}
-            border={"2px dashed white"}
-            display={"flex"}
-            justifyContent={"center"}
-            alignItems={"center"}
-          >
-            <Typography fontWeight={"bold"} variant="h6" color="#E2DBE9">
-              <i className="nf nf-oct-diff_added"></i> Add Task
-            </Typography>
-          </Box>
-        )}
-        {openTask && (
-          <Box
-            // width={"100%"}
-            mt={2}
-            borderRadius={3}
-            pt={2}
-            //   padding={2}
-            pl={2}
-            pr={2}
-            sx={{
-              backgroundColor: "white",
-            }}
-          >
-            <Box width={"100%"}>
-              <TextField
-                id="Task"
-                name="title"
-                placeholder="What are you working on?"
-                fullWidth
-                value={newTask.title}
-                onChange={handleInputChange}
-              />
-              <Typography variant="h5" color="initial">
-                Est Pomodoros
+                transition: "all 0.3s ease",
+                "&:hover": {
+                  backgroundColor: "rgba(255, 255, 255, 0.3)",
+                  backdropFilter: "blur(5px) brightness(1.2)",
+                },
+              }}
+              height={"60px"}
+              width={"100%"}
+              border={"2px dashed white"}
+              display={"flex"}
+              justifyContent={"center"}
+              alignItems={"center"}
+            >
+              <Typography fontWeight={"bold"} variant="h6" color="#E2DBE9">
+                <i className="nf nf-oct-diff_added"></i> Add Task
               </Typography>
-              <TextField
-                id="outlined-number"
-                type="number"
-                size="small"
-                name="totalPomodoros"
-                value={newTask.totalPomodoros}
-                onChange={handleInputChange}
-                InputLabelProps={{
-                  shrink: true,
-                }}
-                sx={{
-                  width: "120px",
-                  backgroundColor: theme.palette.setting.secondary,
-                }}
-              />
-              <Box>
-                <Typography
-                  variant="h6"
-                  color={theme.palette.setting.main}
-                  fontWeight={"bold"}
-                  sx={{ textDecoration: "underline" }}
-                >
-                  <i className="nf nf-cod-add"></i>
-                  Add Note
-                </Typography>
+            </Box>
+          )}
+          {openTask && (
+            <Box
+              // width={"100%"}
+              visibility={!(isDarkTheme && isActive) ? "visible" : "hidden"}
+              mt={2}
+              borderRadius={3}
+              pt={2}
+              //   padding={2}
+              pl={2}
+              pr={2}
+              sx={{
+                backgroundColor: "white",
+              }}
+            >
+              <Box width={"100%"}>
                 <TextField
-                  id="outlined-multiline-flexible"
+                  id="Task"
+                  name="title"
+                  placeholder="What are you working on?"
                   fullWidth
-                  multiline
-                  name="notes"
-                  value={newTask.notes}
-                  placeholder="Some notes"
-                  rows={4}
-                  sx={{
-                    backgroundColor: theme.palette.setting.secondary,
-                  }}
+                  value={newTask.title}
                   onChange={handleInputChange}
                 />
+                <Typography variant="h5" color="initial">
+                  Est Pomodoros
+                </Typography>
+                <TextField
+                  id="outlined-number"
+                  type="number"
+                  size="small"
+                  name="totalPomodoros"
+                  value={newTask.totalPomodoros}
+                  onChange={handleInputChange}
+                  InputLabelProps={{
+                    shrink: true,
+                  }}
+                  sx={{
+                    width: "120px",
+                    backgroundColor: theme.palette.setting.secondary,
+                  }}
+                />
+                <Box>
+                  <Typography
+                    variant="h6"
+                    color={theme.palette.setting.main}
+                    fontWeight={"bold"}
+                    sx={{ textDecoration: "underline" }}
+                  >
+                    <i className="nf nf-cod-add"></i>
+                    Add Note
+                  </Typography>
+                  <TextField
+                    id="outlined-multiline-flexible"
+                    fullWidth
+                    multiline
+                    name="notes"
+                    value={newTask.notes}
+                    placeholder="Some notes"
+                    rows={4}
+                    sx={{
+                      backgroundColor: theme.palette.setting.secondary,
+                    }}
+                    onChange={handleInputChange}
+                  />
+                </Box>
+              </Box>
+              <Box
+                visibility={!(isDarkTheme && isActive) ? "visible" : "hidden"}
+                mt={3}
+                height={"100px"}
+                fullWidth
+                backgroundColor={theme.palette.setting.secondary}
+                display={"flex"}
+                justifyContent={"end"}
+                alignItems={"center"}
+                gap={2}
+                pr={2}
+              >
+                <Button
+                  variant="contained"
+                  sx={{
+                    color: theme.palette.setting.main,
+                    fontWeight: "bold",
+                    backgroundColor: theme.palette.setting.secondary,
+                    ":hover": {
+                      backgroundColor: theme.palette.setting.secondary,
+                    },
+                  }}
+                  onClick={handleClose}
+                >
+                  Cancel
+                </Button>
+                <Button
+                  variant="contained"
+                  sx={{ color: "white", backgroundColor: "black" }}
+                  onClick={handleSave}
+                  disabled={!newTask.title}
+                >
+                  Save
+                </Button>
               </Box>
             </Box>
-            <Box
-              mt={3}
-              height={"100px"}
-              fullWidth
-              backgroundColor={theme.palette.setting.secondary}
-              display={"flex"}
-              justifyContent={"end"}
-              alignItems={"center"}
-              gap={2}
-              pr={2}
-            >
-              <Button
-                variant="contained"
-                sx={{
-                  color: theme.palette.setting.main,
-                  fontWeight: "bold",
-                  backgroundColor: theme.palette.setting.secondary,
-                  ":hover":{
-                    backgroundColor: theme.palette.setting.secondary,
-
-                  }
-                }}
-                onClick={handleClose}
-              >
-                Cancel
-              </Button>
-              <Button
-                variant="contained"
-                sx={{ color: "white", backgroundColor: "black" }}
-                onClick={handleSave}
-                disabled={!newTask.title}
-              >
-                Save
-              </Button>
-            </Box>
-          </Box>
-        )}
-                </Box>
+          )}
+        </Box>
       </Box>
     </>
   );

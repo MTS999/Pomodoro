@@ -77,8 +77,8 @@ const Alarams = () => {
               },
             }}
           >
-            <MenuItem value="/sounds/kitchen.mp3">Kitchen</MenuItem>
             <MenuItem value="/sounds/crow.mp3">Crow</MenuItem>
+            <MenuItem value="/sounds/kitchen.mp3">Kitchen</MenuItem>
             <MenuItem value="/sounds/duzz.mp3">rise</MenuItem>
           </Select>
         </Box>

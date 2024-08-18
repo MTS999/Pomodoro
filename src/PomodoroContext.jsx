@@ -23,6 +23,7 @@ export const PomodoroProvider = ({ children }) => {
   const [isDarkTheme, setIsDarkTheme] = useState(false);
   const [isActive, setIsActive] = useState(false);
   const [totalPomodoroCount, setTotalPomodoroCount] = useState(0);
+  const [manualSwitch, setManualSwitch] = useState(false); // New state to track manual switch
 
 
   console.log("is Dark mode",isDarkTheme);
@@ -111,7 +112,8 @@ export const PomodoroProvider = ({ children }) => {
         theme,
         isDarkTheme, setIsDarkTheme,
         isActive, setIsActive,
-        totalPomodoroCount, setTotalPomodoroCount
+        totalPomodoroCount, setTotalPomodoroCount,
+        manualSwitch, setManualSwitch
       }}
     >
       {children}

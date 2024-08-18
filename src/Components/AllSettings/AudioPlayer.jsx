@@ -11,15 +11,19 @@ const AudioPlayer = () => {
     setAlarmRepeatCount,
     volume,
     setVolume,
+    manualSwitch, setManualSwitch
+
   } = useContext(PomodoroContext);
   const [initial, setInitial] = useState(true);
 
   const audioRef = React.useRef(null);
 
   useEffect(() => {
-    if (!initial) {
+    if (!initial && !manualSwitch) {
       playAudio();
+      
     }
+    setManualSwitch(false)
     setInitial(false);
   }, [select]);
   useEffect(() => {
@@ -36,15 +40,18 @@ const AudioPlayer = () => {
       playGames+=1
       
       const playInterval = setInterval(() => {
-        audioRef.current?.pause();
-        audioRef.current.currentTime = 0; // Reset audio to start
+        if(audioRef.current){
 
-
-        if (playGames < alarmRepeatCount) {
-          audioRef.current?.play();
-          playGames += 1;
-        } else {
-          clearInterval(playInterval);
+          audioRef.current?.pause();
+          audioRef.current.currentTime = 0; // Reset audio to start
+          
+          
+          if (playGames < alarmRepeatCount) {
+            audioRef.current?.play();
+            playGames += 1;
+          } else {
+            clearInterval(playInterval);
+          }
         }
       }, 4000);
     }

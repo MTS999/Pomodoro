@@ -26,6 +26,7 @@ const Counter = () => {
     autoSwitchTasks,
     setAutoSwitchTasks,
     totalPomodoroCount, setTotalPomodoroCount,
+    manualSwitch, setManualSwitch,
     
     isActive, setIsActive,
     isDarkTheme
@@ -39,7 +40,7 @@ const Counter = () => {
   const [pomodoroCounterForLongBreak, setPomodoroCounterForLongBreak] =
     useState(longBreakIntervals);
   const [firstLoad, setFirstLoad] = useState(true);
-  const [manualSwitch, setManualSwitch] = useState(false); // New state to track manual switch
+  // const [manualSwitch, setManualSwitch] = useState(false); // New state to track manual switch
 
 
   const totalTime =
@@ -101,7 +102,7 @@ const Counter = () => {
           setTime(longBreakTime);
           setIsActive(manualSwitch ? false : autoStartBreaks);
         }
-        setManualSwitch(false);
+        // setManualSwitch(false);
       };
   
       const timer = setTimeout(startTimer, 2000); // 1-second delay

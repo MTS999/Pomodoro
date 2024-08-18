@@ -10,6 +10,7 @@ import Task from "./Components/Task";
 import AudioPlayer from "./Components/AllSettings/AudioPlayer";
 import PomodoroContext, { PomodoroProvider } from "./PomodoroContext";
 import { ThemeProvider } from "@mui/material/styles";
+import PomodoroInfo from "./Components/PomodoroInfo";
 
 function App() {
   return (
@@ -25,28 +26,38 @@ function PomodoroApp() {
   return (
     <ThemeProvider theme={theme}>
       <Container
+      
         maxWidth="xl"
-        sx={{ backgroundColor: "background.default", height: "200vh" }}
+        sx={{ backgroundColor: "background.default",
+          //  height: "200vh" 
+          }}
+          
       >
+
         <Box
           display={"flex"}
-          width={"50%"}
+          // width={"50%"}3
+          width={{ xs: "100%", sm: "600px" }} // Responsive width
+
           flexDirection={"column"}
           alignItems={"center"}
           margin={"auto"}
+          pb={5}
         >
           <Header />
+      
+          <Counter />
+          <Setting />
+          <Task />
           <Divider
             sx={{
               width: "100%",
               borderBottomWidth: 2, // Adjust the thickness
-              borderColor: "#A44E4E", // Change the color
+              borderColor: "white", // Change the color
               marginY: 2, // Adjust the width to fit the parent container
             }}
           />
-          <Counter />
-          <Setting />
-          <Task />
+          <PomodoroInfo/>
           <AudioPlayer />
         </Box>
       </Container>

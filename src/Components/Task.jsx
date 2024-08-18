@@ -84,7 +84,7 @@ const Task = () => {
         display={"flex"}
         alignItems={"center"}
         justifyContent={"space-between"}
-        // backgroundColor={"white"}
+        // backgroundColor={"green"}
         // mb={1}
         p={2}
       >
@@ -111,7 +111,7 @@ const Task = () => {
         <Box display={"inline-block"}>
           <Typography
             display={"inline-block"}
-            variant="h4"
+            variant="h5"
             fontWeight={"bold"}
             color={theme.palette.setting.main}
           >
@@ -119,9 +119,12 @@ const Task = () => {
           </Typography>
           <Typography
             display={"inline-block"}
-            variant="h5"
+            variant="h6"
             fontWeight={"bold"}
             color={theme.palette.setting.main}
+            // pt={4}
+            // backgroundColor={"green"}
+            ml={.2}
           >
             /{task.totalPomodoros}
             &nbsp;&nbsp;
@@ -135,6 +138,7 @@ const Task = () => {
             border={`2px solid ${theme.palette.setting.secondary}`}
             // backgroundColor={theme.palette.setting.secondary}
             backgroundColor={"white"}
+            borderRadius={"5px"}
           >
             <Typography variant="h6" color={theme.palette.setting.menu}>
               <i color="white" className="nf nf-md-dots_vertical"></i>
@@ -151,7 +155,12 @@ const Task = () => {
   ));
   return (
     <>
-      <Box width={"100%"} mt={3}>
+      <Box 
+        width={{ sm: "80%", xs: "100%" }}
+        mt={3}
+        mb={2}
+      // backgroundColor="green"
+      >
         <Box>
           <Typography textAlign={"center"} variant="h6" color="white">
             {
@@ -175,32 +184,7 @@ const Task = () => {
             >
               Tasks
             </Typography>
-            {/* <Box
-             
-              // border={"2px solid green"}
-              // display={"inline-block"}
-              justifyContent={"center"}
-              alignContent={"center"}
-              alignItems={"center"}
-              textAlign={"center"}
-              height={"45px"}
-              width={"45px"}
-              // border={`2px solid ${theme.palette.setting.secondary}`}
-              backgroundColor={theme.palette.background.primary}
-              borderRadius={1}
-            >
-              <Typography
-                display={"flex"}
-                justifyContent={"center"}
-                alignContent={"center"}
-              // backgroundColor={"green"}
-              mt={1.2}
-              p={"auto"}
-              //  height={"100%"}
-                variant="h5" color="white">
-                <i color="white" className="nf nf-md-dots_vertical"></i>
-              </Typography>
-            </Box> */}
+          
             <TaskMenu />
           </Box>
 
@@ -214,6 +198,11 @@ const Task = () => {
           />
           {taskList}
         </Box>
+        <Box
+        width={"100%"}
+        // backgroundColor={"green"}
+        >
+
         {!openTask && (
           <Box
             onClick={() => setOpenTask(!openTask)}
@@ -230,7 +219,7 @@ const Task = () => {
               },
             }}
             height={"60px"}
-            width={"90%"}
+            width={"100%"}
             border={"2px dashed white"}
             display={"flex"}
             justifyContent={"center"}
@@ -243,7 +232,7 @@ const Task = () => {
         )}
         {openTask && (
           <Box
-            width={"80%"}
+            // width={"100%"}
             mt={2}
             borderRadius={3}
             pt={2}
@@ -323,6 +312,10 @@ const Task = () => {
                   color: theme.palette.setting.main,
                   fontWeight: "bold",
                   backgroundColor: theme.palette.setting.secondary,
+                  ":hover":{
+                    backgroundColor: theme.palette.setting.secondary,
+
+                  }
                 }}
                 onClick={handleClose}
               >
@@ -339,6 +332,7 @@ const Task = () => {
             </Box>
           </Box>
         )}
+                </Box>
       </Box>
     </>
   );

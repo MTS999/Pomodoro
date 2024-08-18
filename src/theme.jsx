@@ -13,7 +13,8 @@ const pomodoroTheme = createTheme({
       default: '#BA4949',
       primary: "#C15C5C",
       secondary: "#A44E4E",
-      white:"white"
+      white:"white",
+      line:"#A34040"
     },
   },
 });
@@ -22,16 +23,18 @@ const pomodoroTheme = createTheme({
 const shortBreakTheme = createTheme({
   palette: {
     setting: {
-      main: '#E0F7FA',
-      secondary: '#80DEEA',
-      text: '#004D40',
-      menu: "#00796B",
+      main: '#CCCCCC',
+      secondary: '#EFEFEF',
+      text: '#555555',
+      menu: "#999999",
     },
     background: {
-      default: '#00838F',
-      primary: "#00ACC1",
-      secondary: "#006064",
-      white:"white"
+      default: '#9B8238',
+      primary: "#A58F4C",
+      secondary: "#8C7A41",
+      white:"white",
+      line:"#8C7A41"
+
 
     },
   },
@@ -41,16 +44,18 @@ const shortBreakTheme = createTheme({
 const longBreakTheme = createTheme({
   palette: {
     setting: {
-      main: '#D1C4E9',
-      secondary: '#9575CD',
-      text: '#4527A0',
-      menu: "#7E57C2",
+      main: '#CCCCCC',
+      secondary: '#EFEFEF',
+      text: '#555555',
+      menu: "#999999",
     },
     background: {
-      default: '#512DA8',
-      primary: "#673AB7",
-      secondary: "#311B92",
-      white:"white"
+      default: '#545764',
+      primary: "#656874",
+      secondary: "#565963",
+      white:"white",
+      line:"#656874"
+
 
     },
   },

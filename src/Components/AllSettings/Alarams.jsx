@@ -1,5 +1,13 @@
 import React, { useContext } from "react";
-import { Icon, Typography, MenuItem, Slider, Select, Box ,TextField} from "@mui/material";
+import {
+  Icon,
+  Typography,
+  MenuItem,
+  Slider,
+  Select,
+  Box,
+  TextField,
+} from "@mui/material";
 import PomodoroContext from "../../PomodoroContext";
 import { useTheme } from "@emotion/react";
 
@@ -78,27 +86,44 @@ const Alarams = () => {
           width={"100%"}
           display={"flex"}
           justifyContent={"space-between"}
+          alignItems={"center"}
           mb={2}
-          // sx={{ backgroundColor: "green" }}
+          // sx={{ backgroundColor: "red" }}
         >
           <Typography
             display={"inline-block"}
             variant="h6"
             fontWeight={"bold"}
             color={theme.palette.setting.text}
+            // sx={{ backgroundColor: "black" }}
+
           >
             Volume
           </Typography>
           <Box>
+          <Typography
+            display={"inline-block"}
+            variant="h6"
+            fontWeight={"bold"}
+            color={theme.palette.setting.text}
+            // backgroundColor={"green"}
+            height={"100%"}
+            // marginLeft={"20px"}
 
-         {volume}
-          <Slider
-            value={volume}
-            onChange={(e, newValue) => setVolume(newValue)}
-            aria-labelledby="volume-slider"
-            sx={{width:"150px",color:theme.palette.setting.main}}
+            marginRight={"20px"}
+            
+          >
+            {volume}
+            </Typography>
+
+            <Slider
+          
+              value={volume}
+              onChange={(e, newValue) => setVolume(newValue)}
+              aria-labelledby="volume-slider"
+              sx={{ width: "150px", color: theme.palette.setting.main }}
             />
-            </Box>
+          </Box>
         </Box>
         <Box
           width={"100%"}
@@ -117,14 +142,13 @@ const Alarams = () => {
           </Typography>
 
           <TextField
-          size="small"
-          type="number"
-          value={alarmRepeatCount}
-          onChange={(e) => setAlarmRepeatCount(Number(e.target.value))}
-          inputProps={{ min: 1 }}
-          sx={{width:"100px",color:theme.palette.setting.main}}
-
-        />
+            size="small"
+            type="number"
+            value={alarmRepeatCount}
+            onChange={(e) => setAlarmRepeatCount(Number(e.target.value))}
+            inputProps={{ min: 1 }}
+            sx={{ width: "100px", color: theme.palette.setting.main }}
+          />
         </Box>
       </Box>
     </>

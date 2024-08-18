@@ -5,9 +5,9 @@ import { useMemo } from "react";
 const PomodoroContext = createContext();
 
 export const PomodoroProvider = ({ children }) => {
-  const [pomodoroTime, setPomodoroTime] = useState(11);
-  const [shortBreakTime, setShortBreakTime] = useState(11);
-  const [longBreakTime, setLongBreakTime] = useState(11);
+  const [pomodoroTime, setPomodoroTime] = useState(300);
+  const [shortBreakTime, setShortBreakTime] = useState(300);
+  const [longBreakTime, setLongBreakTime] = useState(30);
   const [settingIsOpen, setSettingIsOpen] = useState(false);
   const [longBreakIntervals, setLongBreakIntervals] = useState(2);
   const [autoStartBreaks, setAutoStartBreaks] = useState(true);

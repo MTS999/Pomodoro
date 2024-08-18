@@ -1,10 +1,12 @@
 import React, { useState, useEffect, useContext, useRef } from "react";
 import Button from "@mui/material/Button";
-import { Box, Typography } from "@mui/material";
+import { Box, LinearProgress, Typography } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
 import PomodoroContext from "../PomodoroContext";
+import useMediaQuery from "@mui/material/useMediaQuery";
 
 const Counter = () => {
+  const isExtraSmallScreen = useMediaQuery("(max-width:419px)");
   const theme = useTheme();
   const {
     pomodoroTime,
@@ -33,6 +35,10 @@ const Counter = () => {
   const [pomodoroCounterForLongBreak, setPomodoroCounterForLongBreak] =
     useState(longBreakIntervals);
   const [firstLoad, setFirstLoad] = useState(true);
+
+  const totalTime =
+    select === 1 ? pomodoroTime : select === 2 ? shortBreakTime : longBreakTime;
+  const progress = ((totalTime - time) / totalTime) * 100;
   useEffect(() => {
     let interval;
     if (isActive && time > 0) {
@@ -119,10 +125,10 @@ const Counter = () => {
     });
     let taskToMOve = updatedTasks.filter((task) => task.moveToEnd);
     // console.log(taskToMOve);
-    if (taskToMOve.length>0) {
+    if (taskToMOve.length > 0) {
       updatedTasks = updatedTasks.filter((task) => !task.moveToEnd);
-    
-      updatedTasks.push({...  taskToMOve[0],moveToEnd:false});
+
+      updatedTasks.push({ ...taskToMOve[0], moveToEnd: false });
       if (autoSwitchTasks) {
         // Find the next incomplete task
         const nextTask = updatedTasks.find((task) => !task.taskComplete);
@@ -140,7 +146,7 @@ const Counter = () => {
     let second = time % 60;
 
     return (
-      <Typography variant="h1" color="white">{`${
+      <Typography variant="h1" color="white" fontWeight={"bold"}>{`${
         minuts < 10 ? "0" : ""
       }${minuts}:${second < 10 ? "0" : ""}${second}`}</Typography>
     );
@@ -152,36 +158,65 @@ const Counter = () => {
     setSelect(selection);
   };
   const getButtonStyles = (buttonSelect) => ({
-    
     backgroundColor:
       select === buttonSelect ? theme.palette.background.secondary : "",
     color: theme.palette.background.white,
     fontWeight: select === buttonSelect ? "bold" : "",
-    padding:""
+    padding: "",
   });
   return (
     <>
+      <LinearProgress
+        variant="determinate"
+        value={progress}
+        sx={{
+          color: "white",
+          width: "100%",
+          mb: 2,
+          height: 4,
+          borderRadius: 2,
+          
+          "&.MuiLinearProgress-root": {
+            backgroundColor: theme.palette.background.line, 
+            // backgroundColor: "transparent", 
+          },
+          "& .MuiLinearProgress-bar": {
+            backgroundColor: "white", // Progress color (filled part)
+          },
+        }} // Custom styles
+      />
       <Box
-        width={"85%"}
+        width={{ sm: "80%", xs: "100%" }}
         display={"flex"}
         flexDirection={"column"}
         justifyContent={"space-around"}
         alignItems={"center"}
         sx={{ backgroundColor: theme.palette.background.primary }}
-        padding={3}
+        paddingTop={3}
+        paddingBottom={3}
+        mt={3}
+        backgroundColor="brown"
+        borderRadius={2}
       >
-        <Box width={"100%"} display={"flex"} justifyContent={"space-around"}>
+        <Box
+          width={"100%"}
+          display={"flex"}
+          justifyContent={"center"}
+          gap={isExtraSmallScreen ? "20px" : "opx"}
+        >
           <Button
             size="large"
             variant="text"
             onClick={() => handleClick(pomodoroTime, 1)}
             style={getButtonStyles(1)}
-          sx={{
-            paddingLeft:"14px",
-            paddingRight:"14px"
-          }}
+            sx={{
+              paddingLeft: "14px",
+              paddingRight: "14px",
+            }}
           >
-            Pomodoro
+            {!isExtraSmallScreen ? "Pomodoro" : "Pomo"}
+
+            {/* Pomodoro */}
           </Button>
           <Button
             size="small"
@@ -190,11 +225,11 @@ const Counter = () => {
             onClick={() => handleClick(shortBreakTime, 2)}
             style={getButtonStyles(2)}
             sx={{
-              paddingLeft:"14px",
-              paddingRight:"14px"
+              paddingLeft: "14px",
+              paddingRight: "14px",
             }}
           >
-            Short Break
+            {!isExtraSmallScreen ? "Short Break" : "Short"}
           </Button>
           <Button
             size="small"
@@ -203,11 +238,11 @@ const Counter = () => {
             onClick={() => handleClick(longBreakTime, 3)}
             style={getButtonStyles(3)}
             sx={{
-              paddingLeft:"14px",
-              paddingRight:"14px"
+              paddingLeft: "14px",
+              paddingRight: "14px",
             }}
           >
-            Long Break
+            {!isExtraSmallScreen ? " Long Break" : "Long"}
           </Button>
         </Box>
         <Box mt={4} mb={2}>
@@ -222,11 +257,12 @@ const Counter = () => {
           sx={{
             color: theme.palette.background.default,
             backgroundColor: theme.palette.background.white,
-            fontSize:"20px",
-            fontWeight:"bold",
-            ":hover":{
-              backgroundColor:theme.palette.background.white
-            }
+            fontSize: "20px",
+            padding: "10px 40px",
+            fontWeight: "bold",
+            ":hover": {
+              backgroundColor: theme.palette.background.white,
+            },
           }}
         >
           {isActive ? "Stop" : "Start"}

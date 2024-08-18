@@ -1,1 +1,5 @@
-@import "https://www.nerdfonts.com/assets/css/webfont.css"
+@import "https://www.nerdfonts.com/assets/css/webfont.css";
+*{
+    padding: 0;margin: 0;
+    box-sizing: border-box;
+}

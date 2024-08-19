@@ -6,8 +6,8 @@ const PomodoroContext = createContext();
 
 export const PomodoroProvider = ({ children }) => {
   const [pomodoroTime, setPomodoroTime] = useState(1500);
-  const [shortBreakTime, setShortBreakTime] = useState(900);
-  const [longBreakTime, setLongBreakTime] = useState(300);
+  const [shortBreakTime, setShortBreakTime] = useState(300);
+  const [longBreakTime, setLongBreakTime] = useState(900);
   const [settingIsOpen, setSettingIsOpen] = useState(false);
   const [longBreakIntervals, setLongBreakIntervals] = useState(4);
   const [autoStartBreaks, setAutoStartBreaks] = useState(false);

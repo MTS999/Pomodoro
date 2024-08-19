@@ -105,7 +105,7 @@ const Counter = () => {
         // setManualSwitch(false);
       };
   
-      const timer = setTimeout(startTimer, 2000); // 1-second delay
+      const timer = setTimeout(startTimer, 200); // 1-second delay
   
       return () => clearTimeout(timer); // Cleanup in case the component unmounts or dependencies change
     }

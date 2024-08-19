@@ -58,6 +58,14 @@ const Task = () => {
       setTasks([...Tasks, newTask]); // Add the new task to the Tasks array
     }
     setOpenTask(false);
+    setNewTask({
+      id: "",
+    title: "",
+    totalPomodoros: 1,
+    notes: "",
+    comletetedPomodoro: 0,
+    taskComplete: false,
+    })
   };
   const TaskClickHandle = (e) => {
     console.log("mts", e);

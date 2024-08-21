@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 
 const PomodoroTimer = () => {
-    const [time, setTime] = useState(1500); // 1500 seconds = 25 minutes
+    const [time, setTime] = useState(1500); /
     const [isActive, setIsActive] = useState(false);
 
     useEffect(() => {
